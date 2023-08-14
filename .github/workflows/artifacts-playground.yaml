@@ -14,3 +14,12 @@ jobs:
         with:
           name: ai_content
           path: ./ai_content
+
+      - uses: actions/download-artifact@v3
+        id: download_ai_content
+        with:
+          name: ai_content
+          path: ./ai_content
+
+      - name: Echo download path
+        run: echo ${{steps.download_ai_content.outputs.download-path}}
