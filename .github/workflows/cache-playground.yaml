@@ -26,4 +26,9 @@ jobs:
           cp -r ./ai_content_cache/* ./ai_content/
           ls -a ./ai_content
 
+      - name: Save new cache
+        uses: actions/cache/save@v3
+        with:
+          path: ./ai_content_cache
+          key: ${{ runner.os }}-ai-content-${{ github.sha }}
 
