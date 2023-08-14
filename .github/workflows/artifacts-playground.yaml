@@ -1,0 +1,16 @@
+name: Artifacts Playground
+run-name: ${{ github.actor }} is running Artifacts Playground
+
+on:
+  workflow_dispatch:
+
+jobs:
+  artifacts-playground:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ai_content
+          path: ./ai_content
