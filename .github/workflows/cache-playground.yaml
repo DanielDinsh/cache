@@ -26,6 +26,12 @@ jobs:
           cp -r ./ai_content_cache/* ./ai_content/
           ls -a ./ai_content
 
+      - name: Copy ai_content
+        run: |
+          mkdir -p ./ai_content_cache
+          cp -r ./ai_content/* ./ai_content_cache/
+          ls -a ./ai_content_cache
+
       - name: Save new cache
         uses: actions/cache/save@v3
         with:
