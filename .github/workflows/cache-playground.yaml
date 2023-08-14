@@ -25,6 +25,7 @@ jobs:
           mkdir -p ./ai_content/
           cp -r ./ai_content_cache/* ./ai_content/
           ls -a ./ai_content
+          ls -a ./ai_content/ai_action_embeddings
 
       - name: Copy ai_content
         run: |
