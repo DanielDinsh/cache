@@ -1,0 +1,29 @@
+name: Cache Playground
+run-name: ${{ github.actor }} is running Cache Playground
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cache-playground:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Load AI content from Cache
+        id: load-ai-content-cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ./ai_content_cache
+          key: ${{ runner.os }}-ai-content-cache-miss
+          restore-keys: ${{ runner.os }}-ai-content
+
+      - name: Copy cached Content
+        if: steps.load-ai-content-cache.outputs.cache-matched-key != ''
+        run: |
+          mkdir -p ./ai_content/
+          cp -r ./ai_content_cache/* ./ai_content/
+          ls -a ./ai_content
+
+
