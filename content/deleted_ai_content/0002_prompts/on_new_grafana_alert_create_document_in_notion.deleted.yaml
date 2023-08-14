@@ -1,0 +1,30 @@
+id: 854cf80d-f0e5-448e-81ba-130658ffac7a
+prompt: On New Grafana Alert, Create Document in Notion
+completion:
+  name: On New Grafana Alert, Create Document in Notion
+  desc: When a new Grafana alert is received, create a Notion page containing its content.
+  type: Flow
+  automation_type: event
+  triggers:
+    polling:
+      - trigger_type: grafana.AlertStatusChange
+        name: Alert Status Change
+  workflow:
+    - section: Steps
+      steps:
+        - id: S1
+          action: internal.SetVariable
+          inputs:
+                Name: page_id
+                Type: String
+          name: Set page ID Value
+        - id: S2
+          name: Add Text Block To Page
+          action: notion.AddTextBlockToPage
+          inputs:
+            color: default
+            page: '{{variables.page_id}}'
+            text: 'New Grafana Alert Triggered! Alert Name: {{event.payload.name}},  Triggered
+              at:{{event.payload.newStateDate}}, Dashboard name:{{event.payload.dashboardSlug}},  New
+              state:{{event.payload.state}}'
+            type: paragraph
