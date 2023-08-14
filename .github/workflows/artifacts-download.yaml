@@ -1,0 +1,20 @@
+name: Artifacts Download
+run-name: ${{ github.actor }} is running Artifacts Download
+
+on:
+  workflow_dispatch:
+
+jobs:
+  artifacts-playground:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        id: download_ai_content
+        with:
+          name: ai_content
+          path: ./ai_content
+
+      - name: Echo download path
+        run: echo ${{steps.download_ai_content.outputs.download-path}}
