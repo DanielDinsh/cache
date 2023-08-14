@@ -3,12 +3,23 @@ run-name: ${{ github.actor }} is running Artifacts Download
 
 on:
   workflow_dispatch:
+    inputs:
+      upload:
+        type: boolean
+        default: false
+        description: upload content
 
 jobs:
   artifacts-playground:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - uses: actions/upload-artifact@v3
+        if: inputs.upload
+        with:
+          name: ai_content
+          path: ./ai_content
 
       - uses: actions/download-artifact@v3
         id: download_ai_content
